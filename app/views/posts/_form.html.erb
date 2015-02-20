@@ -1,0 +1,20 @@
+
+
+  <%= form_for @post do |f| %>
+
+  <% @post.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+  <% end %>
+
+
+  <%= f.label :status %>
+  <%= f.text_field :status %><br />
+
+  <%= f.label :user %>
+  <%= f.text_field :user %><br />
+
+  <%= f.label :number_of_likes %>
+  <%= f.text_field :number_of_likes %><br />
+
+  <%= f.submit %>
+  <% end %>

@@ -1,7 +1,10 @@
+<%= notice %>
+
 <h1><%= @post.status %></h1>
 <ul>
   <li><%= @post.user %></li>
     <li><%= @post.number_of_likes %></li>
   </ul>
 
-  <%= link_to "Edit your post", edit_post_path %>
+  <%= link_to "Edit your post", edit_post_path %><br>
+  <%= link_to "See all posts", posts_path %>

@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class Post < ActiveRecord::Base
 
   validates :status, presence: true
   validates :user, presence: true
