@@ -1,52 +1,43 @@
-t.text    "status"
-t.string  "user"
-t.integer "number_of_likes"
-
-
 require 'rails_helper'
 
 describe 'User can CRUD posts' do
 
   scenario 'User can create a post' do
     visit '/'
-    click_on "Users"
-    click_on "New User"
-    fill_in 'user[first_name]', with: "Alexandra"
-    fill_in 'user[last_name]', with: "Hanley"
-    fill_in 'user[email]', with: "alexandrahanley@mail.com"
-    click_on "Create User"
-    expect(page).to have_content("alexandrahanley@mail.com")
-    expect(page).to have_content("User was successfully created.")
+    click_on "Create a Post"
+    fill_in 'post[status]', with: "Hi there"
+    fill_in 'post[user]', with: "Alexandra"
+    fill_in 'post[number_of_likes]', with: 1
+    click_on "Create Post"
+    expect(page).to have_content("Hi there")
   end
 
 
   scenario 'User can view a show page for a post' do
 
-    @user = User.create(first_name: "Alexandra", last_name: "Hanley", email: "alexandrahanley@mail.com")
-    visit "/users/#{@user.id}"
-    expect(page).to have_content("Alexandra")
+    @post = Post.create(status: "Hi", user: "Me", number_of_likes: 2)
+    visit "/posts/#{@post.id}"
+    expect(page).to have_content("Hi")
   end
 
 
-
   scenario 'User can edit a post' do
-    @user = User.create(first_name: "Alexandra", last_name: "Hanley", email: "ah@gmail.com")
-    visit "/users/#{@user.id}"
-    click_on "Edit"
-    fill_in 'user[first_name]', with: "Alejandra"
-    click_on("Update User")
-    expect(page).to have_content("Alejandra")
+    @post = Post.create(status: "Hi", user: "Me", number_of_likes: 2)
+    visit "/posts/#{@post.id}"
+    click_on "Edit your post"
+    fill_in 'post[status]', with: "Ello"
+    click_on("Update Post")
+    expect(page).to have_content("Ello")
 
   end
 
 
   scenario 'User can delete a post' do
-    @user = User.create(first_name: "Alexandra", last_name: "Hanley", email: "ah@gmail.com")
-    visit "/users/#{@user.id}"
-    expect(page).to have_content("Alexandra")
-    click_on "Edit"
-    click_on "Delete"
-    expect(page).to have_content("User was successfully deleted.")
+    @post = Post.create(status: "Hi", user: "Me", number_of_likes: 2)
+    visit "/"
+    expect(page).to have_content("Hi")
+    click_on "Delete Post"
+    expect(page).to have_content("You deleted a post")
   end
 
 end
